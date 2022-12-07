@@ -13,7 +13,7 @@ const NOT_FOUND = 404;
  * @description - Meant for posting all payer transactions. Note that only one transaction should go through at a time.
  * @route - POST api/v1/transactions
  * @param { TransactionManager } transactionManager - Processes and stores transactions
- * @returns {(fn)=> (req,res,next)=> Promise<any>}
+ * @returns { (fn)=> (req,res,next)=> Promise<any> }
  */
 exports.addTransactions = (transactionManager)=> {
     return asyncHandler((req,res,next)=> {
@@ -24,7 +24,8 @@ exports.addTransactions = (transactionManager)=> {
             !transaction    || 
             !transaction.points || 
             !transaction.payer || 
-            !transaction.timestamp
+            !transaction.timestamp ||
+            Object.keys(transaction).length !== 3
         ){
             return next(
                 new ErrorResponse(
@@ -33,6 +34,7 @@ exports.addTransactions = (transactionManager)=> {
                 )
             )
         }
+        //Re-cast transaction timestamp
         transaction.timestamp = new Date(transaction.timestamp);
         if(
             typeof transaction.payer !== 'string' || 
@@ -60,7 +62,7 @@ exports.addTransactions = (transactionManager)=> {
  * @description - 
  * @route - POST api/v1/transactions/spend
  * @param { TransactionManager } transactionManager - Processes and stores transactions
- * @returns {(fn)=> (req,res,next)=> Promise<any>}
+ * @returns { (fn)=> (req,res,next)=> Promise<any> }
  */
 exports.spend = (transactionManager)=> {
     return asyncHandler((req,res,next)=> {
@@ -85,16 +87,11 @@ exports.spend = (transactionManager)=> {
  * @route - GET api/v1/transactions/getPayers
  * @QueryParam - ignoreZero will just filter out all payers with balance of zero.
  * @param { TransactionManager } transactionManager - Processes and stores transactions
- * @returns {(fn)=> (req,res,next)=> Promise<any>}
+ * @returns { (fn)=> (req,res,next)=> Promise<any> }
  */
 exports.getPayers= (transactionManager) => {
     return asyncHandler((req,res,next)=> {
         let payerBalances = transactionManager.payerBalances;
-        if(req.params.ignoreZero){
-            payerBalances = payerBalances.filter((payer)=> {
-                return payer.balance >0;
-            });
-        }
 
         res.status(OK).json({
             success: true,

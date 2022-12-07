@@ -24,6 +24,7 @@ class RecordStore{
      * @returns {number} - Index that the new record should be inserted to
      */
     #_bin_search(left,right, newRecord){
+        
         const middle = left + Math.floor((right - left)/2);
 
         if(right === left && newRecord.timestamp >= this.#_records[right].timestamp)
@@ -32,9 +33,8 @@ class RecordStore{
         else if(right === left)
             return middle;
 
-        if(newRecord.timestamp > this.#_records[middle].timestamp){
+        if(newRecord.timestamp > this.#_records[middle].timestamp)
             return this.#_bin_search(middle+1,right, newRecord);
-        } 
 
         else if(middle === left)//edge case for earliest date in the array.
             return this.#_bin_search(left,middle,newRecord);
@@ -45,7 +45,7 @@ class RecordStore{
 
     
     /**
-     * @description - Optimize insertion by doing binary search on single element: O(log(n)) + O(n). For array transactions: O(n*log(n)) + O(n).
+     * @description - Optimize insertion by doing binary search on single element: O(log(n)) + O(n).
      * @param {{payer:string, points:number, timestamp: Date}} transaction - transaction record.
      */
     addPositiveTransaction(transactions){
@@ -69,7 +69,7 @@ class RecordStore{
      */
     addNegativeTransaction(transaction){
         if(transaction.points >=0)
-            throw new ErrorResponse(400,"enqueueNegative method should only take in negative transactions");
+            throw new ErrorResponse(400,"addNegative method should only take in negative transactions");
 
         transaction.points = Math.abs(transaction.points);
         let index = 0;

@@ -24,7 +24,7 @@ class TransactionManager {
 
     /**
      * @description - inserts transactions records
-     * @param {{payer:string, points:number, timestamp: Date}} transactions - transaction record. This can also be an array
+     * @param {{payer:string, points:number, timestamp: Date}} transactions - transaction record.
      * @throws {Error} - Error when transaction results in a negative points balance.
      */
     insertTransactions(transactions){

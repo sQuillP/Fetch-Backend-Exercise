@@ -9,7 +9,9 @@ const {
 
 
 
-
+/**
+ * In-Memory storage service for transactions. 
+ */
 const transactionManager = new TransactionManager();
 
 router.route("/")
