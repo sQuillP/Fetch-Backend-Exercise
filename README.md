@@ -1,6 +1,6 @@
 # Fetch Backend Exercise!
 
-This exercise is for Fetch Rewards Backend Apprenticeship. It is made with with **Node.js** runtime environment and **ExpressJS** framework to handle incoming HTTP requests.
+This exercise is for Fetch Rewards Backend Apprenticeship. It is made with with **Node.js** runtime environment and **ExpressJS** framework to provide robust, lightweight, and flexible web applications.
 
 
 # Endpoints
