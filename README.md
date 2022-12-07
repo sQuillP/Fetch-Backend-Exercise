@@ -5,9 +5,9 @@ This exercise is for Fetch Rewards Backend Apprenticeship. It is made with with 
 
 # Endpoints
 - Please make API Calls to the server **http://localhost:3000/api/v1**
-- to Get Payers: **GET /transactions/getPayers**
-- to spend points: **POST /transactions/spend**
-- to add a single transaction **POST /transactions**
+- Get Payers: **GET /transactions/getPayers**
+- Spend points: **POST /transactions/spend**
+- Add a single transaction **POST /transactions**
 
 
 # How to Run the Application
